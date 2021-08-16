@@ -12,7 +12,10 @@ find_package(navigation2 REQUIRED)
 find_package(turtlebot3 REQUIRED)
 find_package(turtlebot3_simulations REQUIRED)
 
-install(DIRECTORY launch 
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+install(DIRECTORY params
   DESTINATION share/${PROJECT_NAME}/
 )
 
