@@ -7,17 +7,15 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
 find_package(navigation2 REQUIRED)
 find_package(turtlebot3 REQUIRED)
 find_package(turtlebot3_simulations REQUIRED)
 
-install(DIRECTORY launch
-  DESTINATION share/${PROJECT_NAME}/
-)
-install(DIRECTORY params
-  DESTINATION share/${PROJECT_NAME}/
-)
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME}/)
+install(DIRECTORY params DESTINATION share/${PROJECT_NAME}/)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -29,5 +27,12 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+# Install Python modules
+ament_python_install_package(${PROJECT_NAME})
+
+# Install Python executables
+install(PROGRAMS scripts/py_pub_practice.py DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS scripts/nav2_comm.py DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
